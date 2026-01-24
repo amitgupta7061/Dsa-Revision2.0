@@ -24,6 +24,31 @@ class Solution {
 class Solution {
 public:
     vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size(), i = 0;
+        while (i < n) {
+            int correctIdx = arr[i] - 1;
+            if (arr[i] != arr[correctIdx]) swap(arr[i], arr[correctIdx]);
+            else i++;
+        }
+
+        int repeating = -1, missing = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != i + 1) {
+                repeating = arr[i];
+                missing = i + 1;
+                break;
+            }
+        }   
+
+        return {repeating, missing};
+    }
+};
+
+
+class Solution {
+public:
+    vector<int> findTwoElement(vector<int>& arr) {
         int repeating = -1, missing = -1;
 
         for (int i = 0; i < arr.size(); i++) {
