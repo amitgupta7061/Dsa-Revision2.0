@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -7,27 +7,30 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vector<long long> nums(n);
-        for (auto &it : nums) cin >> it;
+        vector<long long> num1(n), num2(n);
+        
+        for (int i = 0; i < n; ++i) cin >> num1[i];
+        for (int i = 0; i < n; ++i) cin >> num2[i];
 
-        priority_queue<long long, vector<long long>, greater<long long>> pq;
+        long long maxi = -1; 
+        bool flag = true;
 
-        for (int i = 0; i < n; i++) {
-            pq.push(nums[i]);
-            pq.push(nums[i]);
-
-            while (pq.size() > (i + 1)) {
-                pq.pop();
+        for (int i = 0; i < n; ++i) {
+            if (num1[i] > num2[i]) {
+                flag = false;
+                break;
             }
+            if (num1[i] < num2[i]) {
+                if (num1[i] <= maxi) {
+                    flag = false;
+                    break;
+                }
+            }
+            maxi = max(maxi, num1[i]);
         }
 
-        long long maxi = 0;
-        while (!pq.empty()) {
-            maxi += pq.top();
-            pq.pop();
-        }
-
-        cout << maxi << endl;
+        if (flag) cout << "Yes" << "\n";
+        else cout << "No" << "\n";
     }
     return 0;
 }

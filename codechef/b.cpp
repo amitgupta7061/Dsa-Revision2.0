@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -7,25 +7,26 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        vector<int> nums(n + 1);
-        for (int i = 1; i <= n; i++) cin >> nums[i];
+        
+        vector<int> nums(n);
+        for(auto &it : nums) cin >> it;
+        vector<bool> occ(n + 1, false); 
 
-        int last = 0;
-        for (int i = n; i >= 1; i--) {
-            if (nums[i] != i) {
-                last = i;
-                break;
+        int maxi = 0;
+
+        for (int x : nums) {
+            if (x == 1) {
+                occ[1] = true;
+                maxi++;
+            } else {
+                if (occ[x - 1]) {
+                    occ[x] = true;
+                    maxi++;
+                }
             }
         }
 
-        if (last == 0) {
-            cout << 0 << endl;
-            continue;
-        }
-
-        int mini = nums[last];
-        for (int j = last; j <= n; j++) mini = min(mini, nums[j]);
-        cout << mini << endl;
+        cout << maxi << "\n";
     }
     return 0;
 }
