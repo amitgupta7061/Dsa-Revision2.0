@@ -1,22 +1,31 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n, s, x;
-        cin >> n >> s >> x;
-
-        int sum = 0;
-        for (int i = 0; i < n; i++) {
-            int a;
-            cin >> a;
-            sum += a;
+        int n;
+        cin >> n;
+        
+        vector<int> nums(n);
+        int l = 1, r = n;
+        for (int i = n - 1; i >= 0; --i) {
+            int dist = (n - 1) - i;
+            
+            if (dist % 2 == 0) {
+                nums[i] = r;
+                r--;
+            } else {
+                nums[i] = l;
+                l++;
+            }
         }
-
-        if (s >= sum && (s - sum) % x == 0) cout << "YES\n";
-        else cout << "NO\n";
+        
+        for (int i = 0; i < n; ++i) {
+            cout << nums[i] << " ";
+        }
+        cout << endl;
     }
     return 0;
 }

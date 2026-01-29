@@ -1,37 +1,56 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool possible(int k, int n, const vector<int>& a, const vector<int>& b, int min_val, int max_val) {
+    if (max_val - min_val < k) return false;
+    long long lb = (long long)max_val - k, ub = (long long)min_val + k;
+    
+    for (int i = 0; i < n; ++i) {
+        if (a[i] != b[i]) {
+            if (a[i] > lb && a[i] < ub) return false;
+        }
+    }
+    return true;
+}
+
+
 int main() {
     int t;
     cin >> t;
-    while (t--) {
-        int n, q;
-        cin >> n >> q;
+    while (t--){
+        int n;
+        cin >> n;
+        vector<int> nums(n);
+        int mini = 1e9 + 7, maxi = -1;
+        bool flag = true;
 
-        vector<int> nums1(n), nums2(n);
-        for(auto &it : nums1) cin >> it;
-        for(auto &it : nums2) cin >> it;
+        for (int i = 0; i < n; ++i) {
+            cin >> nums[i];
+            if (i > 0 && nums[i] < nums[i-1]) flag = false;
+            mini = min(mini, nums[i]);
+            maxi = max(maxi, nums[i]);
+        }
 
-        vector<int> maxi(n), smaxi(n);
-        for (int i = 0; i < n; ++i)  maxi[i] = max(nums1[i], nums2[i]);
+        if (flag) {
+            cout << -1 << "\n";
+            continue;
+        }
 
-        if (n > 0) {
-            smaxi[n - 1] = maxi[n - 1];
-            for (int i = n - 2; i >= 0; --i) {
-                smaxi[i] = max(maxi[i], smaxi[i + 1]);
+        vector<int> temp = nums;
+        sort(temp.begin(), temp.end());
+
+        int low = 1, high = 1000000000, ans = 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (possible(mid, n, nums, temp, mini, maxi)) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
-        vector<long long> temp(n + 1, 0);
-        for (int i = 0; i < n; ++i) {
-            temp[i + 1] = temp[i] + smaxi[i];
-        }
-
-        for (int i = 0; i < q; ++i) {
-            int l, r;
-            cin >> l >> r;
-            cout << (temp[r] - temp[l - 1]) << " ";
-        }
-        cout << "\n";
+        cout << ans << "\n";
     }
     return 0;
 }
