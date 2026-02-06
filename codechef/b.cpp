@@ -1,32 +1,25 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        
-        vector<int> nums(n);
-        for(auto &it : nums) cin >> it;
-        vector<bool> occ(n + 1, false); 
+        long long b, g, x, y, n;
+        cin >> b >> g >> x >> y >> n;
 
-        int maxi = 0;
-
-        for (int x : nums) {
-            if (x == 1) {
-                occ[1] = true;
-                maxi++;
-            } else {
-                if (occ[x - 1]) {
-                    occ[x] = true;
-                    maxi++;
-                }
-            }
+        if (x + y > n) {
+            cout << -1 << endl;
+            continue;
         }
 
-        cout << maxi << "\n";
+        long long cnt = (b + g + n - 1) / n;
+
+        if (b >= cnt * x && g >= cnt * y) {
+            cout << cnt << endl;
+        } else {
+            cout << -1 << endl;
+        }
     }
     return 0;
 }

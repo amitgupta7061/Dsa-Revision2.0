@@ -1,20 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-
+int main(){
     int t;
     cin >> t;
     while(t--){
-        int n, x, k;
-        cin >> n >> x >> k;
+        int n;
+        string str;
+        cin >> n >> str;
 
-        int ans = INT_MAX;
-        for(int i = 0; i <= n; i+=k){
-            ans = min(ans, abs(x-i));
-        }
-        cout<<ans<<"\n";
+        vector<int> freq(26, 0);
+        for(char ch : str) freq[tolower(ch) - 'a']++;
+
+        sort(freq.begin(), freq.end(), greater<int>());
+
+        int ans = freq[0];
+        if(freq[1] > 0) ans = freq[0] + freq[1];
+        cout << ans << "\n";
     }
-
     return 0;
 }

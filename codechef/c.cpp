@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -6,31 +6,33 @@ int main() {
     cin >> t;
     while (t--) {
         int n;
-        cin >> n;
-        vector<long long> num1(n), num2(n);
-        
-        for (int i = 0; i < n; ++i) cin >> num1[i];
-        for (int i = 0; i < n; ++i) cin >> num2[i];
+        long long k;
+        cin >> n >> k;
 
-        long long maxi = -1; 
-        bool flag = true;
+        vector<long long> nums(n);
+        for(auto &it : nums) cin >> it;
 
-        for (int i = 0; i < n; ++i) {
-            if (num1[i] > num2[i]) {
-                flag = false;
-                break;
-            }
-            if (num1[i] < num2[i]) {
-                if (num1[i] <= maxi) {
-                    flag = false;
+        int result = 0, i = 0;
+
+        while (i < n - 1) {
+            long long mini = nums[i], maxi = nums[i];
+            bool flag = false;
+
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[j] - mini > k || maxi - nums[j] > k) {
+                    result++;
+                    i = j + 1; 
+                    flag = true;
                     break;
                 }
+                mini = min(mini, nums[j]);
+                maxi = max(maxi, nums[j]);
             }
-            maxi = max(maxi, num1[i]);
+
+            if (!flag)  break;
         }
 
-        if (flag) cout << "Yes" << "\n";
-        else cout << "No" << "\n";
+        cout << result << endl;
     }
     return 0;
 }
