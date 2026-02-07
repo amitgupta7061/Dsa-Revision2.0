@@ -11,3 +11,4 @@
 -> https://www.geeksforgeeks.org/problems/duplicate-subtree-in-binary-tree/1?page=3&category=Tree&sortBy=submissions
 -> https://www.geeksforgeeks.org/problems/merge-two-bst-s/1?page=3&category=Tree&sortBy=submissions
 -> https://www.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1?page=3&category=Tree&sortBy=submissions
+-> https://www.geeksforgeeks.org/problems/check-if-subtree/1?page=2&category=Tree&sortBy=submissions
