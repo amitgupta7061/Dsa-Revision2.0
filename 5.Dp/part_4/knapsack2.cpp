@@ -14,8 +14,7 @@ public:
         long long take = LLONG_MAX;
         if(val[ind] <= value) {
             long long sub = f(ind+1, value - val[ind], wt, val, dp);
-            if(sub != LLONG_MAX)
-                take = wt[ind] + sub;
+            if(sub != LLONG_MAX) take = wt[ind] + sub;
         }
 
         return dp[ind][value] = min(take, nottake);
@@ -30,8 +29,7 @@ public:
 
         for(int v = 0; v <= maxValue; v++) {
             long long requiredWeight = f(0, v, wt, val, dp);
-            if(requiredWeight <= W)
-                ans = v;
+            if(requiredWeight <= W) ans = v;
         }
 
         return ans;
