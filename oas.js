@@ -1,5 +1,5 @@
 (async function () {
-    const GEMINI_API_KEY = "---------------------------------------------------";
+    const GEMINI_API_KEY = "AIzaSyBiOxBwQEYKiu0q-Bv7v_u5ZL_W0isJFqQ";
     function getQuestion() {
         const qElem = document.getElementsByClassName("QuestionDescription")[0];
         if (!qElem) return null;
