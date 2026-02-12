@@ -1,22 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
+int main() {
     int t;
     cin >> t;
-    while(t--){
+    
+    while (t--) {
         int n;
-        string str;
-        cin >> n >> str;
-
-        vector<int> freq(26, 0);
-        for(char ch : str) freq[tolower(ch) - 'a']++;
-
-        sort(freq.begin(), freq.end(), greater<int>());
-
-        int ans = freq[0];
-        if(freq[1] > 0) ans = freq[0] + freq[1];
-        cout << ans << "\n";
+        cin >> n;
+        
+        int odd = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            if (x % 2 == 1) odd++;
+        }
+        
+        if (odd % 2 == 0) cout << "YES\n";
+        else cout << "NO\n";
     }
+    
     return 0;
 }

@@ -6,28 +6,38 @@ int main() {
     cin >> t;
     while (t--) {
         int n;
-        string s;
-        cin >> n >> s;
+        cin >> n;
 
-        vector<int> ones;
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == '1') ones.push_back(i);
+        vector<int> nums1(n), nums2(n);
+        for (auto &it : nums1) cin >> it;
+        for (auto &it : nums2) cin >> it;
+
+        vector<int> temp;
+        if (n > 0) {
+            temp.push_back(nums2[0]);
+            for (int i = 1; i < n; ++i) {
+                if (nums2[i] != nums2[i - 1]) temp.push_back(nums2[i]);
+            }
+        }
+        bool flag = false;
+
+        vector<int> freq(n + 1, 0);
+        for (int x : temp) {
+            if (++freq[x] > 1) {
+                cout << "NO" << endl;
+                flag = true;
+                break;
+            }
+        }
+        if (flag) continue;
+
+        int ptr = 0;
+        for (int i = 0; i < n && ptr < temp.size(); ++i) {
+            if (nums1[i] == temp[ptr]) ptr++;
         }
 
-        if (ones.empty()) {
-            cout << (n + 2) / 3 << endl;
-            continue;
-        }
-
-        int sum = 0, stgap = ones[0]; 
-        sum += (stgap + 1) / 3;
-        for (int i = 0; i < ones.size() - 1; ++i) {
-            int gapsize = ones[i+1] - ones[i] - 1;
-            sum += gapsize / 3;
-        }
-        int endgap = n - 1 - ones.back();
-        sum += (endgap + 1) / 3;
-        cout << ones.size() + sum << endl;
+        if (ptr == temp.size()) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
     return 0;
 }

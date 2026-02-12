@@ -1,31 +1,26 @@
-#include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
+
+int digitSum(int n) {
+    int sum = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
 
 int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        
-        vector<int> nums(n);
-        int l = 1, r = n;
-        for (int i = n - 1; i >= 0; --i) {
-            int dist = (n - 1) - i;
-            
-            if (dist % 2 == 0) {
-                nums[i] = r;
-                r--;
-            } else {
-                nums[i] = l;
-                l++;
-            }
+        int x;
+        cin >> x;
+        int cnt = 0;
+        for (int y = x + 1; y <= x + 100; ++y) {
+            if (y - digitSum(y) == x) ++cnt;
         }
-        
-        for (int i = 0; i < n; ++i) {
-            cout << nums[i] << " ";
-        }
-        cout << endl;
+        cout << cnt << "\n";
     }
     return 0;
 }
