@@ -52,20 +52,14 @@ public:
 class Solution {
 public:
     int eggDrop(int eggs, int floors) {
-        
         vector<long long> dp(eggs+1, 0);
-        
         int moves = 0;
-        
         while(dp[eggs] < floors){
-            
             moves++;
-            
             for(int e = eggs; e >= 1; e--){
                 dp[e] = dp[e] + dp[e-1] + 1;
             }
         }
-        
         return moves;
     }
 };
