@@ -1,26 +1,21 @@
 #include <iostream>
 using namespace std;
 
-int digitSum(int n) {
-    int sum = 0;
-    while (n > 0) {
-        sum += n % 10;
-        n /= 10;
-    }
-    return sum;
-}
-
 int main() {
     int t;
     cin >> t;
     while (t--) {
-        int x;
-        cin >> x;
-        int cnt = 0;
-        for (int y = x + 1; y <= x + 100; ++y) {
-            if (y - digitSum(y) == x) ++cnt;
+        long long x, y;
+        cin >> x >> y;
+        if ((x - 2 * y) % 3 != 0) {
+            cout << "NO" << endl;
+            continue;
         }
-        cout << cnt << "\n";
+        if (x - 2 * y >= 0 && x + 4 * y >= 0) {
+            cout << "YES" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
     }
     return 0;
 }
